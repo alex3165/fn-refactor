@@ -1,7 +1,9 @@
-module.exports = {
+import { FedRequest, Mode } from "../src/interfaces";
+
+export const mock: FedRequest = {
   fullSplitMode: true,
-  ccamp5DetermineWinner: "openrate",
-  subjectlines: [
+  ccamp5DetermineWinner: "openrate" as Mode,
+  subjects: [
     {
       openRate: 10,
       clickRate: 5,

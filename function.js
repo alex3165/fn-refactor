@@ -1,6 +1,6 @@
 module.exports = {
   calculateWinningEmailSFMC: function(req) {
-    console.log(req);
+    // console.log(req);
     let previousCount = 0;
     let winningIndex = 0;
 
@@ -31,111 +31,117 @@ module.exports = {
         numValidSl++;
         let curSl = req.subjectlines[i];
 
-        // let determineWinner = "";
-        // if (req.full_split_mode) {
-        //   determineWinner = "openrate";
-        // } else {
-        //   determineWinner = req.ccamp5_determine_winner.trim();
-        //   req.ccamp5_determine_winner = determineWinner;
-        // }
+        let determineWinner = "";
+        if (req.full_split_mode) {
+          determineWinner = "openrate";
+        } else {
+          determineWinner = req.ccamp5_determine_winner.trim();
+          req.ccamp5_determine_winner = determineWinner;
+        }
 
-        // totalNumberSent += curSl.num_recipients;
+        totalNumberSent += curSl.num_recipients;
 
-        // if (userHighestOpenRate < curSl.open_rate && curSl.ownsl) {
-        //   userHighestOpenRate = curSl.open_rate;
-        // } else if (phraseeHighestOpenRate < curSl.open_rate && !curSl.ownsl) {
-        //   phraseeHighestOpenRate = curSl.open_rate;
-        // }
+        if (userHighestOpenRate < curSl.open_rate && curSl.ownsl) {
+          userHighestOpenRate = curSl.open_rate;
+        } else if (phraseeHighestOpenRate < curSl.open_rate && !curSl.ownsl) {
+          phraseeHighestOpenRate = curSl.open_rate;
+        }
 
-        // switch (determineWinner) {
-        //   case "openrate":
-        //     let currentOpenRate = curSl.open_rate;
+        switch (determineWinner) {
+          case "openrate":
+            let currentOpenRate = curSl.open_rate;
 
-        //     if (userHighestRate < currentOpenRate && curSl.ownsl) {
-        //       userHighestRate = currentOpenRate;
-        //       userLineExist = true;
-        //       userWiningSubjectline = curSl;
-        //     } else if (phraseeHighestRate < currentOpenRate && !curSl.ownsl) {
-        //       phraseeHighestRate = currentOpenRate;
-        //       phraseeWiningSubjectline = curSl;
-        //     }
+            if (userHighestRate < currentOpenRate && curSl.ownsl) {
+              userHighestRate = currentOpenRate;
+              userLineExist = true;
+              userWiningSubjectline = curSl;
+            } else if (phraseeHighestRate < currentOpenRate && !curSl.ownsl) {
+              phraseeHighestRate = currentOpenRate;
+              phraseeWiningSubjectline = curSl;
+            }
 
-        //     if (currentOpenRate < phraseeLowestRate && !curSl.ownsl) {
-        //       phrasee_lowest_sl = curSl;
-        //       phraseeLowestRate = currentOpenRate;
-        //     }
+            if (currentOpenRate < phraseeLowestRate && !curSl.ownsl) {
+              phrasee_lowest_sl = curSl;
+              phraseeLowestRate = currentOpenRate;
+            }
 
-        //     if (previousCount < currentOpenRate) {
-        //       winningIndex = i;
-        //       previousCount = currentOpenRate;
-        //     }
-        //     break;
-        //   case "clickrate":
-        //     let currentClickRate = curSl.click_rate;
+            if (previousCount < currentOpenRate) {
+              winningIndex = i;
+              previousCount = currentOpenRate;
+            }
+            break;
+          case "clickrate":
+            let currentClickRate = curSl.click_rate;
 
-        //     if (userHighestRate < currentClickRate && curSl.ownsl) {
-        //       userHighestRate = currentClickRate;
-        //       userLineExist = true;
-        //       userWiningSubjectline = curSl;
-        //     } else if (phraseeHighestRate < currentClickRate && !curSl.ownsl) {
-        //       phraseeHighestRate = currentClickRate;
-        //       phraseeWiningSubjectline = curSl;
-        //     }
+            if (userHighestRate < currentClickRate && curSl.ownsl) {
+              userHighestRate = currentClickRate;
+              userLineExist = true;
+              userWiningSubjectline = curSl;
+            } else if (phraseeHighestRate < currentClickRate && !curSl.ownsl) {
+              phraseeHighestRate = currentClickRate;
+              phraseeWiningSubjectline = curSl;
+            }
 
-        //     if (currentClickRate < phraseeLowestRate && !curSl.ownsl) {
-        //       phrasee_lowest_sl = curSl;
-        //       phraseeLowestRate = currentClickRate;
-        //     }
+            if (currentClickRate < phraseeLowestRate && !curSl.ownsl) {
+              phrasee_lowest_sl = curSl;
+              phraseeLowestRate = currentClickRate;
+            }
 
-        //     if (previousCount < currentClickRate) {
-        //       winningIndex = i;
-        //       previousCount = currentClickRate;
-        //     }
-        //     break;
-        //   case "clicktoopenrate":
-        //     let currentClickToOpenRate = curSl.clicktoopen_rate;
+            if (previousCount < currentClickRate) {
+              winningIndex = i;
+              previousCount = currentClickRate;
+            }
+            break;
+          case "clicktoopenrate":
+            let currentClickToOpenRate = curSl.clicktoopen_rate;
 
-        //     if (userHighestRate < currentClickToOpenRate && curSl.ownsl) {
-        //       userHighestRate = currentClickToOpenRate;
-        //       userLineExist = true;
-        //       userWiningSubjectline = curSl;
-        //     } else if (phraseeHighestRate < currentClickToOpenRate && !curSl.ownsl) {
-        //       phraseeHighestRate = currentClickToOpenRate;
-        //       phraseeWiningSubjectline = curSl;
-        //     }
+            if (userHighestRate < currentClickToOpenRate && curSl.ownsl) {
+              userHighestRate = currentClickToOpenRate;
+              userLineExist = true;
+              userWiningSubjectline = curSl;
+            } else if (
+              phraseeHighestRate < currentClickToOpenRate &&
+              !curSl.ownsl
+            ) {
+              phraseeHighestRate = currentClickToOpenRate;
+              phraseeWiningSubjectline = curSl;
+            }
 
-        //     if (currentClickToOpenRate < phraseeLowestRate && !curSl.ownsl) {
-        //       phrasee_lowest_sl = curSl;
-        //       phraseeLowestRate = currentClickToOpenRate;
-        //     }
+            if (currentClickToOpenRate < phraseeLowestRate && !curSl.ownsl) {
+              phrasee_lowest_sl = curSl;
+              phraseeLowestRate = currentClickToOpenRate;
+            }
 
-        //     if (previousCount < currentClickToOpenRate) {
-        //       winningIndex = i;
-        //       previousCount = currentClickToOpenRate;
-        //     }
-        //     break;
-        //   default:
-        //     let currentPhraseeScore = curSl.phrasee_score;
+            if (previousCount < currentClickToOpenRate) {
+              winningIndex = i;
+              previousCount = currentClickToOpenRate;
+            }
+            break;
+          default:
+            let currentPhraseeScore = curSl.phrasee_score;
 
-        //     if (userHighestRate < currentPhraseeScore && curSl.ownsl) {
-        //       userHighestRate = currentPhraseeScore;
-        //       userLineExist = true;
-        //       userWiningSubjectline = curSl;
-        //     } else if (phraseeHighestRate < currentPhraseeScore && !curSl.ownsl) {
-        //       phraseeHighestRate = currentPhraseeScore;
-        //       phraseeWiningSubjectline = curSl;
-        //     }
+            if (userHighestRate < currentPhraseeScore && curSl.ownsl) {
+              userHighestRate = currentPhraseeScore;
+              userLineExist = true;
+              userWiningSubjectline = curSl;
+            } else if (
+              phraseeHighestRate < currentPhraseeScore &&
+              !curSl.ownsl
+            ) {
+              phraseeHighestRate = currentPhraseeScore;
+              phraseeWiningSubjectline = curSl;
+            }
 
-        //     if (currentPhraseeScore < phraseeLowestRate && !curSl.ownsl) {
-        //       phrasee_lowest_sl = curSl;
-        //       phraseeLowestRate = currentPhraseeScore;
-        //     }
+            if (currentPhraseeScore < phraseeLowestRate && !curSl.ownsl) {
+              phrasee_lowest_sl = curSl;
+              phraseeLowestRate = currentPhraseeScore;
+            }
 
-        //     if (previousCount > currentPhraseeScore) {
-        //       winningIndex = i;
-        //       previousCount = currentPhraseeScore;
-        //     }
-        // }
+            if (previousCount > currentPhraseeScore) {
+              winningIndex = i;
+              previousCount = currentPhraseeScore;
+            }
+        }
 
         totalopened += parseFloat(curSl.open_rate) || 0;
         totalclicked += parseFloat(curSl.click_rate) || 0;
@@ -175,14 +181,14 @@ module.exports = {
     }
 
     // Update subjectline Winning field in campaign collection for phrasee step 4 charts...
-    // req.winner = winningSL.ownsl ? "user" : "phrasee";
+    req.winner = winningSL.ownsl ? "user" : "phrasee";
     req.user_highest_open_rate = userHighestOpenRate;
     req.phrasee_highest_open_rate = phraseeHighestOpenRate;
-    // req.userWiningSubjectline = userWiningSubjectline;
-    // req.phraseeWiningSubjectline = phraseeWiningSubjectline;
-    // req.phrasee_lowest_sl = phrasee_lowest_sl;
-    // req.totalNumberSent = totalNumberSent;
-    // req.userLineExist = userLineExist;
+    req.userWiningSubjectline = userWiningSubjectline;
+    req.phraseeWiningSubjectline = phraseeWiningSubjectline;
+    req.phrasee_lowest_sl = phrasee_lowest_sl;
+    req.totalNumberSent = totalNumberSent;
+    req.userLineExist = userLineExist;
 
     req.input_results_at = new Date();
     let date = new Date();
