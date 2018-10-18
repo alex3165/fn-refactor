@@ -1,0 +1,3 @@
+You've been provided with a real-life example of a function that exists within our current infrastructure. The goal of this exercise is two-fold; to refactor/improve the function itself, and to provide constructive feedback on why you've made the changes you have. We'll ask you to present the feedback when you come back in for the follow-up meeting.
+
+This function evaluates an array of results and finds a winning entry based on a specific parameter present in the input data. Once the winning entry is found the input record is updated with new fields. You can find an example of the input data in the mock-response.js file. You are free to change the data structures and how the function works.
